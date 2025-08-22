@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -26,22 +27,22 @@
 <body class="bg-gradient-to-br from-pink-100 to-purple-100 min-h-screen flex items-center justify-center p-4">
     <div class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl max-w-lg w-full text-center transform transition-all duration-300 hover:scale-105">
         <h1 class="text-4xl md:text-5xl font-bold text-pink-500 mb-6">
-            A Note Just For You ❤️
+            Enter Password
         </h1>
-        <p class="text-gray-600 text-lg mb-8">
-            Please enter your name below to see a special message!
+        <p id="message" class="text-gray-600 text-lg mb-8">
+            Please enter the password to see your special message!
         </p>
         <input 
-            type="text" 
-            id="nameInput" 
-            placeholder="Enter your name..."
+            type="password" 
+            id="passwordInput" 
+            placeholder="Enter password..."
             class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-300 text-center text-lg transition-colors duration-200" 
         />
         <button 
-            id="revealButton" 
+            id="loginButton" 
             class="mt-6 w-full text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-200 active:scale-95 bg-pink-500 hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-300"
         >
-            Reveal the Note
+            Login
         </button>
 
         <div id="noteContainer" class="mt-8 hidden">
@@ -53,19 +54,24 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const nameInput = document.getElementById('nameInput');
-            const revealButton = document.getElementById('revealButton');
+            const passwordInput = document.getElementById('passwordInput');
+            const loginButton = document.getElementById('loginButton');
             const noteContainer = document.getElementById('noteContainer');
             const noteMessage = document.getElementById('noteMessage');
+            const messageText = document.getElementById('message');
 
-            revealButton.addEventListener('click', () => {
-                const name = nameInput.value.trim();
-                if (name) {
-                    noteMessage.innerHTML = `My dearest ${name}, I wanted to create something special to remind you that you are the most incredible person in my life. You light up my world every single day.`;
+            const CORRECT_PASSWORD = "0636714490";
+
+            loginButton.addEventListener('click', () => {
+                const enteredPassword = passwordInput.value.trim();
+                if (enteredPassword === CORRECT_PASSWORD) {
+                    messageText.classList.add('hidden');
+                    noteMessage.innerHTML = `My dearest love, I wanted to create something special to remind you that you are the most incredible person in my life. You light up my world every single day.`;
                     noteContainer.classList.remove('hidden');
                 } else {
-                    noteMessage.innerHTML = "Please enter a name first!";
-                    noteContainer.classList.remove('hidden');
+                    noteContainer.classList.add('hidden');
+                    messageText.innerHTML = "Incorrect password! Please try again.";
+                    messageText.classList.remove('hidden');
                 }
             });
         });
