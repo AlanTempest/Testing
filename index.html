@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Note For My Love</title>
+    <!-- Tailwind CSS for a clean, modern look -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .heart-animation {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 to-purple-100 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl max-w-lg w-full text-center transform transition-all duration-300 hover:scale-105">
+        <h1 class="text-4xl md:text-5xl font-bold text-pink-500 mb-6">
+            A Note Just For You ❤️
+        </h1>
+        <p class="text-gray-600 text-lg mb-8">
+            Please enter your name below to see a special message!
+        </p>
+        <input 
+            type="text" 
+            id="nameInput" 
+            placeholder="Enter your name..."
+            class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-300 text-center text-lg transition-colors duration-200" 
+        />
+        <button 
+            id="revealButton" 
+            class="mt-6 w-full text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-200 active:scale-95 bg-pink-500 hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-300"
+        >
+            Reveal the Note
+        </button>
+
+        <div id="noteContainer" class="mt-8 hidden">
+            <p id="noteMessage" class="text-xl italic text-gray-700 leading-relaxed heart-animation">
+                <!-- The message will appear here -->
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nameInput = document.getElementById('nameInput');
+            const revealButton = document.getElementById('revealButton');
+            const noteContainer = document.getElementById('noteContainer');
+            const noteMessage = document.getElementById('noteMessage');
+
+            revealButton.addEventListener('click', () => {
+                const name = nameInput.value.trim();
+                if (name) {
+                    noteMessage.innerHTML = `My dearest ${name}, I wanted to create something special to remind you that you are the most incredible person in my life. You light up my world every single day.`;
+                    noteContainer.classList.remove('hidden');
+                } else {
+                    noteMessage.innerHTML = "Please enter a name first!";
+                    noteContainer.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
